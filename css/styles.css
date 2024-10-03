@@ -1,0 +1,129 @@
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
+.box-container {
+    width: 90%;
+    max-width: 400px; /* Adjusted for better responsiveness */
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+    z-index: 3; /* Ensure it stays above the background */
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 5px 0;
+}
+
+input {
+    width: 100%; /* Make inputs take full width of the box */
+    max-width: 300px; /* Limit max width for better design */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e67e22;
+}
+
+.switch-form {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: #1abc9c;
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 15pt;
+    color: #f39c12;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .box-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+/* Background Animation */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('./../img/favicon.png') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: 1;
+    animation: pulse 20s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
