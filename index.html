@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Basic Meta Tags -->
+    <meta name="description" content="Discover a wide range of premium services including credit card data, fullz, dumps, and specialized tools like CC checkers. Secure and discreet transactions guaranteed.">
+    <meta name="keywords" content="credit cards, fullz, dumps, CC checker, data tools, online privacy, secure transactions">
+    <meta name="author" content="mDark">
+
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Secure Credit Card Data and Tools Marketplace">
+    <meta property="og:description" content="Shop premium credit card information, fullz, dumps, and advanced tools for safe online transactions. Your privacy is our priority.">
+    <meta property="og:image" content="https://mtoken.info/img/favicon.png">
+    <meta property="og:url" content="https://mtoken.info">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secure Credit Card Data and Tools Marketplace">
+    <meta name="twitter:description" content="Explore our collection of credit card data, fullz, dumps, and essential tools like CC checkers. Discreet and secure shopping experience.">
+    <meta name="twitter:image" content="https://mtoken.info/img/favicon.png">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Secure Data Marketplace",
+        "url": "https://mtoken.info",
+        "description": "Your trusted source for premium credit card information, fullz, dumps, and tools for secure online transactions.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://mtoken.info/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://mtoken.info">
+    
+    <title>mDark | Dashboard</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box-container" id="login">
+            <h1>Login</h1>
+            <form id="loginForm" class="form-container active">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" data-error-id="loginUsernameError" placeholder="Enter your username" required>
+                <span id="loginUsernameError" class="error-message"></span>
+                
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" data-error-id="loginPasswordError" placeholder="Enter your password" required>
+                <span id="loginPasswordError" class="error-message"></span>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p class="switch-form">Don't have an account? <a href="#" onclick="toggleRegister()">Register</a></p>
+        </div>
+        
+        <div class="box-container" id="register" style="display:none;">
+            <h1>Register</h1>
+            <form id="registerForm" class="form-container active">
+                <label for="registerUsername">Username</label>
+                <input type="text" id="registerUsername" data-error-id="registerUsernameError" placeholder="Choose a username" required>
+                <span id="registerUsernameError" class="error-message"></span>
+                
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" data-error-id="registerPasswordError" placeholder="Create a password" required>
+                <span id="registerPasswordError" class="error-message"></span>
+                
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" data-error-id="confirmPasswordError" placeholder="Confirm your password" required>
+                <span id="confirmPasswordError" class="error-message"></span>
+                
+                <button type="submit">Register</button>
+            </form>
+            <p class="switch-form">Already have an account? <a href="#" onclick="toggleLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between Login and Registration forms
+        const registerSection = document.getElementById("register");
+        const loginSection = document.getElementById("login");
+
+        function toggleLogin() {
+            loginSection.style.display = "block";
+            registerSection.style.display = "none";
+        }
+
+        function toggleRegister() {
+            loginSection.style.display = "none";
+            registerSection.style.display = "block";
+        }
+
+        // Clear error messages
+        function clearErrors() {
+            document.getElementById("registerUsernameError").innerText = "";
+            document.getElementById("registerPasswordError").innerText = "";
+            document.getElementById("confirmPasswordError").innerText = "";
+            document.getElementById("loginUsernameError").innerText = "";
+            document.getElementById("loginPasswordError").innerText = "";
+        }
+
+        // Registration form submission handling
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            clearErrors();
+
+            const username = document.getElementById("registerUsername").value;
+            const password = document.getElementById("registerPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            let hasError = false;
+
+            if (username.length < 5) {
+                document.getElementById("registerUsernameError").innerText = "Username must be at least 5 characters long.";
+                hasError = true;
+            }
+            if (password.length < 8) {
+                document.getElementById("registerPasswordError").innerText = "Password must be at least 8 characters long.";
+                hasError = true;
+            }
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+                hasError = true;
+            }
+
+            if (!hasError) {
+                localStorage.setItem(username, password);
+                alert("Registration successful! You can now log in.");
+                this.reset(); // Reset the form
+                toggleLogin(); // Switch to login form after registration
+            }
+        });
+
+        // Login form submission handling
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            clearErrors();
+
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+
+            let hasError = false;
+
+            if (username.length < 5) {
+                document.getElementById("loginUsernameError").innerText = "Username must be at least 5 characters long.";
+                hasError = true;
+            }
+            if (password.length < 8) {
+                document.getElementById("loginPasswordError").innerText = "Password must be at least 8 characters long.";
+                hasError = true;
+            }
+
+            if (!hasError) {
+                const storedPassword = localStorage.getItem(username);
+                if (storedPassword && storedPassword === password) {
+                    alert("Login successful!");
+                    localStorage.setItem("loggedInUser", username);
+                    window.location.href = "dashboard.html"; // Redirect to secured page
+                } else {
+                    document.getElementById("loginUsernameError").innerText = "Invalid credentials. Please try again.";
+                }
+            }
+        });
+
+        // Clear error messages and input values
+        function clearErrorsAndInputs(inputElement) {
+            const errorElement = document.getElementById(inputElement.dataset.errorId);
+            if (errorElement.innerText) {
+                errorElement.innerText = ""; // Clear error message
+                inputElement.value = ""; // Clear input field
+            }
+        }
+
+        // Attach focus event listeners to input fields
+        document.getElementById("registerUsername").addEventListener("focus", function() {
+            clearErrorsAndInputs(this);
+        });
+        document.getElementById("registerPassword").addEventListener("focus", function() {
+            clearErrorsAndInputs(this);
+        });
+        document.getElementById("confirmPassword").addEventListener("focus", function() {
+            clearErrorsAndInputs(this);
+        });
+        document.getElementById("loginUsername").addEventListener("focus", function() {
+            clearErrorsAndInputs(this);
+        });
+        document.getElementById("loginPassword").addEventListener("focus", function() {
+            clearErrorsAndInputs(this);
+        });
+    </script>
+</body>
+</html>
